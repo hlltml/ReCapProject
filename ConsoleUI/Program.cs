@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
+using Entities.Concrete;
 using System;
 
 namespace ConsoleUI
@@ -10,14 +12,15 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //carManager'ı ICarService interface'inden örnekledim. Tek iş sınıfı olduğu için doğrudan CarManager'dan da oluşturabilirdim.
-            ICarService carManager = new CarManager(new InMemoryCarDal());
+            ICarService carManager = new CarManager(new EfCarDal());
+
             foreach (var car in carManager.GetAll())
             {
                 Console.WriteLine(car.Description);
             }
 
             Console.WriteLine("\n-------Markaya Göre Listeleme-------");
-            foreach (var car in carManager.GetById(2))
+            foreach (var car in carManager.GetCarsByBrandId(2))
             {
                 Console.WriteLine(car.Description);
             }
