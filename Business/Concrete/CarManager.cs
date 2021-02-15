@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,7 +25,7 @@ namespace Business.Concrete
             {
                 _carDal.Add(car);
             }
-            else if (car.Description.Length <2)
+            else if (car.Description.Length < 2)
             {
                 Console.WriteLine("Araba ismi en az 2 karakter olmalı");
             }
@@ -32,13 +33,32 @@ namespace Business.Concrete
             {
                 Console.WriteLine("Arabanın günlük fiyatı 0'dan büyük olmalı");
             }
+        }
 
+        public void Update(Car car)
+        {
+            _carDal.Update(car);
+        }
+
+        public void Delete(Car car)
+        {
+            _carDal.Delete(car);
+        }
+
+        public Car GetById(int id)
+        {
+            return _carDal.Get(c => c.CarId == id);
         }
 
         public List<Car> GetAll()
         {
             //Doğrudan tüm ürünleri döndük. Ancak burada if'ler ile bazı kontroller yapabiliriz öncesinde. (Yetkisi var mı vb.)
             return _carDal.GetAll();
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
         }
 
         public List<Car> GetCarsByBrandId(int id)
@@ -48,7 +68,7 @@ namespace Business.Concrete
 
         public List<Car> GetCarsByColorId(int id)
         {
-            return _carDal.GetAll(c => c.BrandId == id);
+            return _carDal.GetAll(c => c.ColorId == id);
         }
     }
 }
