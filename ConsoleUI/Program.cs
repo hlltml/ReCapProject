@@ -12,7 +12,7 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //CarGetCarDetailsTest();
-            //CarGetAllTest();
+            CarGetAllTest();
             //CarGetCarsByBrandIdTest(2);
             //CarGetByIdTest();
             //CarGetCarsByColorIdTest();
@@ -24,12 +24,24 @@ namespace ConsoleUI
             //BrandUpdateTest();
             //BrandDeleteTest();
             //BrandGetByIdTest();
+
+            ColorAddTest();
+        }
+
+        private static void ColorAddTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            colorManager.Add(new Color { ColorName = "Yeşil" });
+            foreach (var color in colorManager.GetAll().Data)
+            {
+                Console.WriteLine(color.ColorName);
+            }
         }
 
         private static void BrandGetByIdTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            Console.WriteLine(brandManager.GetById(2003).BrandName);
+            Console.WriteLine(brandManager.GetById(2003).Data.BrandName);
         }
 
         private static void BrandDeleteTest()
@@ -42,7 +54,7 @@ namespace ConsoleUI
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             brandManager.Update(new Brand { BrandId = 2002, BrandName = "Bmw" });
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandName);
             }
@@ -52,7 +64,7 @@ namespace ConsoleUI
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             brandManager.Add(new Brand { BrandName = "Opel" });
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandName);
             }
@@ -61,7 +73,7 @@ namespace ConsoleUI
         private static void CarGetByIdTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            Console.WriteLine(carManager.GetById(4).CarName);
+            Console.WriteLine(carManager.GetById(4));
         }
 
         private static void CarDeleteTest()
@@ -93,7 +105,7 @@ namespace ConsoleUI
         private static void CarGetCarsByColorIdTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarsByColorId(1))
+            foreach (var car in carManager.GetCarsByColorId(1).Data)
             {
                 Console.WriteLine(car.CarName);
             }
@@ -102,7 +114,7 @@ namespace ConsoleUI
         private static void CarGetCarsByBrandIdTest(int id)
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarsByBrandId(id))
+            foreach (var car in carManager.GetCarsByBrandId(id).Data)
             {
                 Console.WriteLine(car.CarName);
             }
@@ -111,16 +123,19 @@ namespace ConsoleUI
         private static void CarGetAllTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetAll())
+
+            var result = carManager.GetAll();
+            foreach (var car in result.Data)
             {
                 Console.WriteLine(car.CarName);
             }
+            Console.WriteLine(result.Message); 
         }
 
         private static void CarGetCarDetailsTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
+            foreach (var car in carManager.GetCarDetails().Data)
             {
                 Console.WriteLine("{0} {1} {2} - {3} TL", car.ColorName, car.BrandName, car.CarName, car.DailyPrice);
             }
