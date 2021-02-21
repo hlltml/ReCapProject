@@ -19,7 +19,7 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
-        public IResult Add(Rental rental) //Yorum satırına aldığım kod bloğu da çalışıyor. Daha uzun.
+        public IResult Add(Rental rental)
         {
             var result = _rentalDal.Get(r => r.CarId == rental.CarId && (r.ReturnDate == null || r.ReturnDate > DateTime.Now));
 
