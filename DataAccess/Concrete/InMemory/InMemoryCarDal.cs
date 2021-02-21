@@ -64,12 +64,17 @@ namespace DataAccess.Concrete.InMemory
             return _cars;
         }
 
-        public Car Get(Expression<Func<Car, bool>> filter)
+        public Car GetById(Expression<Func<Car, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
         public List<CarDetailDto> GetCarDetails()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Get(Expression<Func<Car, bool>> filter = null)
         {
             throw new NotImplementedException();
         }

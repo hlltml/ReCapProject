@@ -11,8 +11,15 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            //UserAddTest();
+            //CustomerAddTest();
+
+            RentalAddTest();
+
+
+
             //CarGetCarDetailsTest();
-            CarGetAllTest();
+            //CarGetAllTest();
             //CarGetCarsByBrandIdTest(2);
             //CarGetByIdTest();
             //CarGetCarsByColorIdTest();
@@ -25,7 +32,29 @@ namespace ConsoleUI
             //BrandDeleteTest();
             //BrandGetByIdTest();
 
-            ColorAddTest();
+            //ColorAddTest();
+        }
+
+        private static void RentalAddTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            var result = rentalManager.Add(new Rental { CarId = 1, CustomerId = 1, RentDate = DateTime.Now });
+            Console.WriteLine(result.Message);
+        }
+
+        private static void CustomerAddTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            customerManager.Add(new Customer { UserId = 1 });
+            customerManager.Add(new Customer { UserId = 3 });
+        }
+
+        private static void UserAddTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            userManager.Add(new User { FirstName = "Fatih", LastName = "Korkut", Email = "fatih@korkut.com", Password = "12345" });
+            userManager.Add(new User { FirstName = "Gökhan", LastName = "Gündoğan", Email = "gokhan@gundogan.com", Password = "12345" });
+            userManager.Add(new User { FirstName = "Ezgi", LastName = "Akarsu", Email = "ezgi@akarsu.com", Password = "12345" });
         }
 
         private static void ColorAddTest()
