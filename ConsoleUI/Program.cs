@@ -3,6 +3,7 @@ using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
+using Core.Entities.Concrete;
 using System;
 
 namespace ConsoleUI
@@ -49,13 +50,13 @@ namespace ConsoleUI
             customerManager.Add(new Customer { UserId = 3 });
         }
 
-        private static void UserAddTest()
-        {
-            UserManager userManager = new UserManager(new EfUserDal());
-            userManager.Add(new User { FirstName = "Fatih", LastName = "Korkut", Email = "fatih@korkut.com", Password = "12345" });
-            userManager.Add(new User { FirstName = "Gökhan", LastName = "Gündoğan", Email = "gokhan@gundogan.com", Password = "12345" });
-            userManager.Add(new User { FirstName = "Ezgi", LastName = "Akarsu", Email = "ezgi@akarsu.com", Password = "12345" });
-        }
+        //private static void UserAddTest()
+        //{
+        //    UserManager userManager = new UserManager(new EfUserDal());
+        //    userManager.Add(new User { FirstName = "Fatih", LastName = "Korkut", Email = "fatih@korkut.com", Password = "12345" });
+        //    userManager.Add(new User { FirstName = "Gökhan", LastName = "Gündoğan", Email = "gokhan@gundogan.com", Password = "12345" });
+        //    userManager.Add(new User { FirstName = "Ezgi", LastName = "Akarsu", Email = "ezgi@akarsu.com", Password = "12345" });
+        //}
 
         private static void ColorAddTest()
         {
