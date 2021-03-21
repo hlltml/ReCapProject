@@ -28,5 +28,6 @@ namespace Business.Constants
         public static string UserNotFound = "Kullanıcı bulunamadı";
         public static string PasswordError = "Şifre hatalı";
         public static string SuccessfulLogin = "Sisteme giriş başarılı";
+        public static string CarImageLimitExceeded = "Sisteme 5'ten fazla resim yüklenemez";
     }
 }
